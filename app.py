@@ -2,7 +2,7 @@ import gradio as gr
 from transformers import AutoTokenizer, AutoModelForCausalLM, pipeline
 from langchain_huggingface import HuggingFacePipeline
 import os
-
+import warnings
 # Hugging Face model and token
 model_name = "google/gemma-2b"
 HF_TOKEN = os.getenv("HF_token")  # Store your token as environment variable
@@ -76,4 +76,5 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[chatbot, state]
     )
 
-demo.launch(css=css)
+demo.launch(share = False, debug = True, css=css, prevent_thread_lock=False)
+warnings.filterwarnings("ignore", category=ResponseWarning)
