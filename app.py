@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, pipeline
 from langchain_huggingface import HuggingFacePipeline
 from transformers import AutoModelForCausalLM
 import os
-
+import warnings
 # Load model
 model_name = "google/gemma-2b"
 
@@ -58,4 +58,5 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         outputs=[chatbot, state]
     )
 
-demo.launch(css = css)
+demo.launch(share = False, debug = True, css = css)
+warnings.filterwarnings("ignore", category=ResourceWarning)
